@@ -1,59 +1,105 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ?? Système de Gestion des Congés
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## ?? Objectif
+Application web de **gestion des congés** pour les ressources humaines, développée avec **Laravel 12** et **MySQL**.  
+Elle permet de gérer les demandes de congés avec trois rôles distincts :  
+- **Employé** : Demander et suivre ses congés  
+- **Manager** : Valider ou refuser les congés de son équipe  
+- **Admin** : Gérer l’ensemble du système (employés, départements, types de congés)
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ?? Fonctionnalités principales
+- Authentification sécurisée (Laravel Breeze)  
+- Gestion des rôles et permissions (Employé, Manager, Admin)  
+- Création et suivi des demandes de congés  
+- Validation et rejet par les managers/admins  
+- Notifications automatiques pour chaque action importante  
+- Dashboards personnalisés selon le rôle  
+- Statistiques globales et par département (Admin)  
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## ??? Installation
+### 1. Cloner le projet
+```bash
+git clone https://github.com/imanechnafa/Laravel-chnafa.git
+cd laravel-rh-conges
+```
 
-## Learning Laravel
+### 2. Installer les dépendances
+```bash
+composer install
+npm install && npm run build
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 3. Configurer la base de données
+Dans `.env` :
+```
+DB_CONNECTION=mysql
+DB_DATABASE=laravel-rh-conges
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 4. Lancer les migrations
+```bash
+php artisan migrate
+```
 
-## Laravel Sponsors
+### 5. Démarrer le serveur
+```bash
+php artisan serve
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## ?? Structure de la base de données
+- **Users** : comptes utilisateurs (email, mot de passe hashé)  
+- **Employés** : informations RH (matricule, rôle, solde congés, département)  
+- **Départements** : organisation interne  
+- **Types de congés** : annuel, maladie, maternité…  
+- **Congés** : demandes avec statut (`en_attente`, `approuve`, `rejete`)  
+- **Validations** : historique des décisions des managers/admins  
+- **Notifications** : messages envoyés aux utilisateurs  
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## ?? Sécurité
+- Mots de passe hashés (bcrypt/argon2)  
+- Middleware `auth` pour protéger les routes  
+- Vérification stricte des permissions par rôle  
+- Exclusion des fichiers sensibles via `.gitignore`  
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## ?? Interface
+- **Bootstrap 5** pour un design responsive  
+- **Dashboards** adaptés à chaque rôle  
+- **Badges colorés** pour les statuts des congés  
+- **Notifications en temps réel**  
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## ?? Points forts
+? Architecture claire et maintenable  
+? Permissions granulaires par rôle  
+? Notifications intégrées  
+? Statistiques et suivi complet  
+? Interface moderne et responsive  
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## ?? Comptes de test
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Pour tester l’application, voici des comptes déjà configurés :
+
+| Rôle        | Email              | Mot de passe   | Accès principal |
+|-------------|--------------------|----------------|-----------------|
+| **Admin**   | admin@rh.com       | password123    | Dashboard global, gestion employés, départements, types de congés, statistiques |
+| **Manager** | imane@rh.com       | password123    | Dashboard manager, validation des congés de son équipe, gestion de son département |
+| **Employé** | alaa@rh.com        | password123    | Dashboard employé, création et suivi de ses demandes de congés |
+
+---
+
+?? **Remarque** : Les mots de passe sont hashés en base de données, mais pour les tests, ces identifiants sont disponibles après migration et création des utilisateurs.
